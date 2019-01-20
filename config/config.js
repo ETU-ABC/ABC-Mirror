@@ -93,6 +93,13 @@ var config = {
 				showPublishDate: true
 			}
 		},
+		{
+				module: 'ABC-EtuCourseTimetable',
+				position: "bottom_right",
+				config: {
+						// See below for configurable options
+				}
+		}
 	]
 
 };
