@@ -93,6 +93,13 @@ var config = {
 				showPublishDate: true
 			}
 		},
+		{
+				module: 'ABC-EtuCourseTimetable',
+				position: "top_right",
+				config: {
+					ogrenciNo: 151201022
+				}
+		}
 	]
 
 };
