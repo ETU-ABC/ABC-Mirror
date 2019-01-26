@@ -95,9 +95,9 @@ var config = {
 		},
 		{
 				module: 'ABC-EtuCourseTimetable',
-				position: "bottom_right",
+				position: "top_right",
 				config: {
-						// See below for configurable options
+					ogrenciNo: 151201022
 				}
 		}
 	]
