@@ -80,20 +80,6 @@ var config = {
 			}
 		},
 		{
-			module: "newsfeed",
-			position: "bottom_bar",
-			config: {
-				feeds: [
-					{
-						title: "New York Times",
-						url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-					}
-				],
-				showSourceTitle: true,
-				showPublishDate: true
-			}
-		},
-		{
 				module: 'ABC-EtuCourseTimetable',
 				position: "top_right",
 				config: {
