@@ -12,22 +12,22 @@ Module.register("compliments", {
 	defaults: {
 		compliments: {
 			anytime: [
-				"Her sey guzel olacak :)"
+				"Hey there sexy!"
 			],
 			morning: [
-				"Bugun guzel bir gun olacak :)",
-				"Iyi uyudun mu?",
-				"Yeni bir güne hazır mısınz?"
+				"Good morning, handsome!",
+				"Enjoy your day!",
+				"How was your sleep?"
 			],
 			afternoon: [
-				"Gun ortasina kadar neler basardin?",
-				"Bugun cok iyi gorunuyorsun!",
-				"Isiltinin sirri ne?"
+				"Hello, beauty!",
+				"You look sexy!",
+				"Looking good today!"
 			],
 			evening: [
-				"Yorucu bir gundu haa?",
-				"Bugunu nasil sonlandiracaksin? Bir film?",
-				"Sanirim artik keyif zamani"
+				"Wow, you look hot!",
+				"You look nice!",
+				"Hi, sexy!"
 			]
 		},
 		updateInterval: 30000,
@@ -200,3 +200,4 @@ Module.register("compliments", {
 	},
 
 });
+

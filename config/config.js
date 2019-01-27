@@ -45,7 +45,29 @@ var config = {
 		},
 		{
 			module: "compliments",
-			position: "lower_third"
+			position: "lower_third",
+			config: {
+				compliments: {
+					anytime: [
+						"Her sey guzel olacak :)"
+					],
+					morning: [
+						"Bugun guzel bir gun olacak :)",
+						"Iyi uyudun mu?",
+						"Yeni bir güne hazır mısınz?"
+					],
+					afternoon: [
+						"Gun ortasina kadar neler basardin?",
+						"Bugun cok iyi gorunuyorsun!",
+						"Isiltinin sirri ne?"
+					],
+					evening: [
+						"Yorucu bir gundu haa?",
+						"Bugunu nasil sonlandiracaksin? Bir film?",
+						"Sanirim artik keyif zamani"
+					]
+				}
+			}
 		},
 		//***{
 		//	module: "currentweather",
