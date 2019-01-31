@@ -14,3 +14,14 @@
 .title{
     text-align: center;
 }
+
+.customtable {
+    border-collapse: collapse !important;
+    font-size: 12px !important;
+    table-layout: fixed !important;
+    width: auto !important;
+}
+
+.customtable, th, td {
+    border: 1px solid white !important;
+}
