@@ -49,7 +49,21 @@ Module.register("ABC-EtuExamTimeTable", {
 		dataRequest.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
-					self.processData(JSON.parse(this.response));
+                    // this is a temporary fix for now
+                    // since my own api does not provide the courses
+                    // taken by student, i use this urlApi as a gateway
+					const arr = JSON.parse(this.response);
+					console.log(arr);
+					let courses = [];
+					arr.forEach(function(elem) {
+						if (!courses.includes(elem[0])) {
+							courses.push(elem[0]);
+						}
+					});
+
+                    // get exams for each course
+                    self.getExamDetailsBeautiful(courses);
+
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
 					Log.error(self.name, this.status);
@@ -65,6 +79,39 @@ Module.register("ABC-EtuExamTimeTable", {
 		dataRequest.send();
 	},
 
+	getExamDetailsBeautiful: function(courses) {
+		var exam_details = [];
+		// TODO just for now...
+		const url_base = "http://localhost:5000/exam/";
+		var self = this;
+
+		courses.forEach(function (elem) {
+			var dataRequest = new XMLHttpRequest();
+			var url = url_base + elem;
+			dataRequest.open("GET", url, true);
+			dataRequest.setRequestHeader('Content-type', 'text/plain');
+			dataRequest.onreadystatechange = function() {
+				if (this.readyState === 4) {
+					if (this.status === 200) {
+						var exams = JSON.parse(this.response);
+						exams.forEach(function(exam) {
+							exam_details.push(exam);
+						});
+						// when all exams are fetched, show the table
+						if (courses.length <= exam_details.length) {
+							self.processData(exam_details);
+						}
+					} else if (this.status === 401) {
+						self.updateDom(self.config.animationSpeed);
+						Log.error(self.name, this.status);
+					} else {
+						Log.error(self.name, "Could not load data.");
+					}
+				}
+			};
+			dataRequest.send();
+		});
+	},
 
 	/* scheduleUpdate()
 	 * Schedule next update.
@@ -92,7 +139,7 @@ Module.register("ABC-EtuExamTimeTable", {
 
 		// If this.dataRequest is not empty
 		if (this.dataRequest) {
-			wrapper.appendChild(tabloOlustur(this.config.ogrenciNo, this.dataRequest.grid));
+			wrapper.appendChild(tabloOlustur(this.config.ogrenciNo, this.dataRequest));
 		}
 
 		// Data from helper
@@ -109,7 +156,7 @@ Module.register("ABC-EtuExamTimeTable", {
 
 	getStyles: function () {
 		return [
-			"ABC-EtuCourseTimetable.css",
+			"ABC-EtuExamTimetable.css",
 		];
 	},
 
@@ -142,4 +189,75 @@ Module.register("ABC-EtuExamTimeTable", {
 	},
 });
 
-function tabloOlustur(ogrencino,grid) {}
+function tabloOlustur(ogrencino, exam_details) {
+	console.log("in tablo olustur", exam_details);
+
+	var table = document.createElement("table");
+	table.className="customtable";
+
+	var tablehead = document.createElement("thead");
+
+	var tr = document.createElement("tr");
+	tr.className="title";
+
+	var th0 = document.createElement("th");
+	var day0 = document.createTextNode("151201022");
+	th0.appendChild(day0);
+	tr.appendChild(th0);
+
+	var th1 = document.createElement("th");
+	var day1 = document.createTextNode("Tarih");
+	th1.appendChild(day1);
+	tr.appendChild(th1);
+
+	var th2 = document.createElement("th");
+	var day2 = document.createTextNode("Saat");
+	th2.appendChild(day2);
+	tr.appendChild(th2);
+
+	var th3 = document.createElement("th");
+	var day3 = document.createTextNode("Ders Kodu");
+	th3.appendChild(day3);
+	tr.appendChild(th3);
+
+	var th4 = document.createElement("th");
+	var day4 = document.createTextNode("Ders Adi");
+	th4.appendChild(day4);
+	tr.appendChild(th4);
+
+	tablehead.appendChild(tr);
+	table.appendChild(tablehead);
+
+	var programPanel = document.createElement("tbody");
+	for(var i=0;i<exam_details.length;i++){
+		var tr = document.createElement('tr');
+		var th = document.createElement('th');
+
+		var td1 = document.createElement('td');
+		var td2 = document.createElement('td');
+		var td3 = document.createElement('td');
+		var td4 = document.createElement('td');
+
+		th.scope="row";
+		th.className="text-white ";
+		text1 = document.createTextNode(exam_details[i]['exam_date']);
+		text2 = document.createTextNode(exam_details[i]['exam_time']);
+		text3 = document.createTextNode(exam_details[i]['course_code']);
+		text4 = document.createTextNode(exam_details[i]['course_name']);
+
+		td1.appendChild(text1);
+		td2.appendChild(text2);
+		td3.appendChild(text3);
+		td4.appendChild(text4);
+
+		tr.appendChild(th);
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+		tr.appendChild(td3);
+		tr.appendChild(td4);
+
+		programPanel.appendChild(tr);
+	}
+	table.appendChild(programPanel);
+	return table;
+}
