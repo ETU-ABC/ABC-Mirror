@@ -29,12 +29,12 @@ var config = {
 		{
 			module: "alert",
 		},
-		{
-   			module: 'MMM-Remote-Control',
-    			// uncomment the following line to show the URL of the remote control on the mirror
-    			position: 'bottom_left'
-    			// you can hide this module afterwards from the remote control itself
-		},
+		// {
+   		// 	module: 'MMM-Remote-Control',
+    	// 		// uncomment the following line to show the URL of the remote control on the mirror
+    	// 		position: 'bottom_left'
+    	// 		// you can hide this module afterwards from the remote control itself
+		// },
 		{
 			module: "updatenotification",
 			position: "top_bar"
@@ -60,41 +60,41 @@ var config = {
 			module: "compliments",
 			position: "lower_third"
 		},
+		// {
+		// 	module: "currentweather",
+		// 	position: "top_right",
+		// 	config: {
+		// 		location: "New York",
+		// 		locationID: "",  //ID from http://bulk.openweathermap.org/sample/; unzip the gz file and find your city
+		// 		appid: "YOUR_OPENWEATHER_API_KEY"
+		// 	}
+		// },
+		// {
+		// 	module: "weatherforecast",
+		// 	position: "top_right",
+		// 	header: "Weather Forecast",
+		// 	config: {
+		// 		location: "New York",
+		// 		locationID: "5128581",  //ID from https://openweathermap.org/city
+		// 		appid: "YOUR_OPENWEATHER_API_KEY"
+		// 	}
+		// },
+		// {
+		// 	module: "newsfeed",
+		// 	position: "bottom_bar",
+		// 	config: {
+		// 		feeds: [
+		// 			{
+		// 				title: "New York Times",
+		// 				url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+		// 			}
+		// 		],
+		// 		showSourceTitle: true,
+		// 		showPublishDate: true
+		// 	}
+		// },
 		{
-			module: "currentweather",
-			position: "top_right",
-			config: {
-				location: "New York",
-				locationID: "",  //ID from http://bulk.openweathermap.org/sample/; unzip the gz file and find your city
-				appid: "YOUR_OPENWEATHER_API_KEY"
-			}
-		},
-		{
-			module: "weatherforecast",
-			position: "top_right",
-			header: "Weather Forecast",
-			config: {
-				location: "New York",
-				locationID: "5128581",  //ID from https://openweathermap.org/city
-				appid: "YOUR_OPENWEATHER_API_KEY"
-			}
-		},
-		{
-			module: "newsfeed",
-			position: "bottom_bar",
-			config: {
-				feeds: [
-					{
-						title: "New York Times",
-						url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-					}
-				],
-				showSourceTitle: true,
-				showPublishDate: true
-			}
-		},
-		{
-				module: 'ABC-EtuCourseTimetable',
+				module: 'ABC-EtuExamTimeTable',
 				position: "top_right",
 				config: {
 					ogrenciNo: 151201022
