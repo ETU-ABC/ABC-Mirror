@@ -99,6 +99,10 @@ Module.register("ABC-EtuExamTimeTable", {
 						});
 						// when all exams are fetched, show the table
 						if (courses.length <= exam_details.length) {
+							exam_details.sort(function(a,b){
+								// TODO-cemal check if the exam date is past
+								return self.dateHelper(a.exam_date, "dd/MM/yyyy", "/") - self.dateHelper(b.exam_date, "dd/MM/yyyy", "/");
+							});
 							self.processData(exam_details);
 						}
 					} else if (this.status === 401) {
@@ -139,7 +143,7 @@ Module.register("ABC-EtuExamTimeTable", {
 
 		// If this.dataRequest is not empty
 		if (this.dataRequest) {
-			wrapper.appendChild(tabloOlustur(this.config.ogrenciNo, this.dataRequest));
+			wrapper.appendChild(examTimeTable(this.config.ogrenciNo, this.dataRequest));
 		}
 
 		// Data from helper
@@ -156,7 +160,7 @@ Module.register("ABC-EtuExamTimeTable", {
 
 	getStyles: function () {
 		return [
-			"ABC-EtuExamTimetable.css",
+			"ABC-EtuExamTimeTable.css",
 		];
 	},
 
@@ -187,10 +191,46 @@ Module.register("ABC-EtuExamTimeTable", {
 			this.updateDom();
 		}
 	},
+
+	/** Adopted from
+	 * https://jsfiddle.net/Sushil231088/q56yd0rp/
+	 */
+	dateHelper: function(string, format, delimiter) {
+		var date = string;
+		var formatedDate = null;
+		var formatLowerCase = format.toLowerCase();
+		var formatItems = formatLowerCase.split(delimiter);
+		var dateItems = date.split(delimiter);
+		var monthIndex = formatItems.indexOf("mm");
+		var monthNameIndex = formatItems.indexOf("mmm");
+		var dayIndex = formatItems.indexOf("dd");
+		var yearIndex = formatItems.indexOf("yyyy");
+		var d = dateItems[dayIndex];
+		if (d < 10) {
+			d = "0"+ d;
+		}
+		if (monthIndex > -1) {
+			var month = parseInt(dateItems[monthIndex]);
+			month -= 1;
+			if (month < 10) {
+				month = "0" + month;
+			}
+			formatedDate = new Date(dateItems[yearIndex], month, d);
+		} else if (monthNameIndex > -1) {
+			var monthName = dateItems[monthNameIndex];
+			month = getMonthIndex(monthName);
+			if (month < 10) {
+				month = "0" + month;
+			}
+			formatedDate = new Date(dateItems[yearIndex], month, d);
+		}
+		return formatedDate;
+	}
 });
 
-function tabloOlustur(ogrencino, exam_details) {
-	console.log("in tablo olustur", exam_details);
+
+function examTimeTable(ogrencino, exam_details) {
+	// console.log("in tablo olustur", exam_details);
 
 	var table = document.createElement("table");
 	table.className="customtable";
