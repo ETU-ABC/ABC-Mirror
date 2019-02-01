@@ -9,19 +9,14 @@
  *
  */
 
-
-
-.title{
-    text-align: center;
-}
-
-.customtable {
+.myTable {
     border-collapse: collapse !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
     table-layout: fixed !important;
     width: auto !important;
 }
 
-.customtable, th, td {
+.myTable, th, td {
     border: 1px solid white !important;
+    text-align: center;
 }

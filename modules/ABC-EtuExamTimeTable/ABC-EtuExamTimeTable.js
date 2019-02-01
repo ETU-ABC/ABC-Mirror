@@ -240,11 +240,6 @@ function examTimeTable(ogrencino, exam_details) {
 	var tr = document.createElement("tr");
 	tr.className="title";
 
-	var th0 = document.createElement("th");
-	var day0 = document.createTextNode("151201022");
-	th0.appendChild(day0);
-	tr.appendChild(th0);
-
 	var th1 = document.createElement("th");
 	var day1 = document.createTextNode("Tarih");
 	th1.appendChild(day1);
@@ -290,7 +285,6 @@ function examTimeTable(ogrencino, exam_details) {
 		td3.appendChild(text3);
 		td4.appendChild(text4);
 
-		tr.appendChild(th);
 		tr.appendChild(td1);
 		tr.appendChild(td2);
 		tr.appendChild(td3);
