@@ -82,7 +82,7 @@ Module.register("ABC-EtuExamTimeTable", {
 	getExamDetailsBeautiful: function(courses) {
 		var exam_details = [];
 		// TODO just for now...
-		const url_base = "http://localhost:5000/exam/";
+		const url_base = "https://lit-brushlands-65739.herokuapp.com/exam/";
 		var self = this;
 
 		courses.forEach(function (elem) {
