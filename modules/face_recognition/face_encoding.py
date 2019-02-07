@@ -106,6 +106,7 @@ while True:
                 screen.fill((0, 0, 0))
                 ctrl = True
                 locked = True
+                
         if ctrl:
                 if access == "True":
                         pygame.quit()
