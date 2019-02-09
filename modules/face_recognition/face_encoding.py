@@ -1,25 +1,18 @@
-        # USAGE
-# python pi_face_recognition.py --cascade haarcascade_frontalface_default.xml --encodings encodings.pickle
-
 # import the necessary packages
 from imutils.video import VideoStream
 from imutils.video import FPS
 import face_recognition
-import argparse
 import imutils
 import pickle
 import time
 import cv2
-import pyautogui
-import time
-import os
-import pygame
-import time
 
+#Initial variables
 oldtime = time.time()
 locked = False
 unlocked = True
 time.sleep(2)
+
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
 print("[INFO] loading encodings + face detector...")
@@ -31,16 +24,19 @@ print("[INFO] starting video stream...")
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
+#hide modules
 def unlock():
         print("Kilit açıldı")
+        
+#Display modules
 def lock():
         print("Kilitlendi")
-
+        
 # start the FPS counter
 fps = FPS().start()
+
 # loop over frames from the video file stream
 while True:
-
         window = vs.read()
         window = imutils.resize(window, width=1000)
         # grab the frame from the threaded video stream and resize it
@@ -63,10 +59,12 @@ while True:
         # compute the facial embeddings for each face bounding box
         encodings = face_recognition.face_encodings(rgb, boxes)
         names = []
+        #if there is no matched face for x second, then lock 
         if (time.time() - oldtime >= 10) and (not locked):
                 lock()
                 locked = True
                 unlocked = True
+                
         # loop over the facial embeddings
         for encoding in encodings:
                 # attempt to match each face in the input image to our known
@@ -77,9 +75,11 @@ while True:
 
                 # check to see if we have found a match
                 if True in matches:
+                        #Show modules
                         if unlocked:
                                 unlock()
                                 unlocked = False
+                                
                         # find the indexes of all matched faces then initialize a
                         # dictionary to count the total number of times each face
                         # was matched
@@ -99,20 +99,7 @@ while True:
                         oldtime = time.time()
                         locked = False
                 # update the list of names
-                names.append(name)
-        '''
-        if ((time.time() - oldtime) >= 10 ) and ((not locked) and (ctr)):
-                locked()
-                locked = True
-                ctr = False
-                oldtime = time.time()     
-        if access:
-                #unlocked()
-                access = False
-                locked = False
-                ctr = True
-                # update the FPS counter
-        '''             
+                names.append(name)         
         fps.update()
 
 # stop the timer and display FPS information
