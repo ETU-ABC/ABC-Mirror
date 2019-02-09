@@ -17,7 +17,8 @@ import pygame
 import time
 
 oldtime = time.time()
-
+locked = False
+unlocked = True
 time.sleep(2)
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
@@ -30,89 +31,89 @@ print("[INFO] starting video stream...")
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
-#Control variables
-locked = False
-access = False
-ctr = True
+def unlock():
+        print("Kilit açıldı")
+def lock():
+        print("Kilitlendi")
 
 # start the FPS counter
 fps = FPS().start()
-
 # loop over frames from the video file stream
 while True:
-        while locked:
-                window = vs.read()
-                window = imutils.resize(window, width=1000)
-                # grab the frame from the threaded video stream and resize it
-                # to 500px (to speedup processing)
-                # convert the input frame from (1) BGR to grayscale (for face
-                # detection) and (2) from BGR to RGB (for face recognition)
-                gray = cv2.cvtColor(window, cv2.COLOR_BGR2GRAY)
-                rgb = cv2.cvtColor(window, cv2.COLOR_BGR2RGB)
 
-                # detect faces in the grayscale frame
-                rects = detector.detectMultiScale(gray, scaleFactor=1.1,
-                        minNeighbors=5, minSize=(30, 30),
-                        flags=cv2.CASCADE_SCALE_IMAGE)
+        window = vs.read()
+        window = imutils.resize(window, width=1000)
+        # grab the frame from the threaded video stream and resize it
+        # to 500px (to speedup processing)
+        # convert the input frame from (1) BGR to grayscale (for face
+        # detection) and (2) from BGR to RGB (for face recognition)
+        gray = cv2.cvtColor(window, cv2.COLOR_BGR2GRAY)
+        rgb = cv2.cvtColor(window, cv2.COLOR_BGR2RGB)
 
-                # OpenCV returns bounding box coordinates in (x, y, w, h) order
-                # but we need them in (top, right, bottom, left) order, so we
-                # need to do a bit of reordering
-                boxes = [(y, x + w, y + h, x) for (x, y, w, h) in rects]
+        # detect faces in the grayscale frame
+        rects = detector.detectMultiScale(gray, scaleFactor=1.1,
+                minNeighbors=5, minSize=(30, 30),
+                flags=cv2.CASCADE_SCALE_IMAGE)
 
-                # compute the facial embeddings for each face bounding box
-                encodings = face_recognition.face_encodings(rgb, boxes)
-                names = []
-                print("Starting the procedure")
-                # loop over the facial embeddings
-                for encoding in encodings:
-                        print("FACE ENCODING")
-                        # attempt to match each face in the input image to our known
-                        # encodings
-                        matches = face_recognition.compare_faces(data["encodings"],
-                                encoding)
-                        name = "Unknown"
+        # OpenCV returns bounding box coordinates in (x, y, w, h) order
+        # but we need them in (top, right, bottom, left) order, so we
+        # need to do a bit of reordering
+        boxes = [(y, x + w, y + h, x) for (x, y, w, h) in rects]
 
-                        # check to see if we have found a match
-                        if True in matches:
-                                print("FACE MATCHED")
-                                # find the indexes of all matched faces then initialize a
-                                # dictionary to count the total number of times each face
-                                # was matched
-                                matchedIdxs = [i for (i, b) in enumerate(matches) if b]
-                                counts = {}
+        # compute the facial embeddings for each face bounding box
+        encodings = face_recognition.face_encodings(rgb, boxes)
+        names = []
+        if (time.time() - oldtime >= 10) and (not locked):
+                lock()
+                locked = True
+                unlocked = True
+        # loop over the facial embeddings
+        for encoding in encodings:
+                # attempt to match each face in the input image to our known
+                # encodings
+                matches = face_recognition.compare_faces(data["encodings"],
+                        encoding)
+                name = "Unknown"
 
-                                # loop over the matched indexes and maintain a count for
-                                # each recognized face face
-                                for i in matchedIdxs:
-                                        name = data["names"][i]
-                                        counts[name] = counts.get(name, 0) + 1
+                # check to see if we have found a match
+                if True in matches:
+                        if unlocked:
+                                unlock()
+                                unlocked = False
+                        # find the indexes of all matched faces then initialize a
+                        # dictionary to count the total number of times each face
+                        # was matched
+                        matchedIdxs = [i for (i, b) in enumerate(matches) if b]
+                        counts = {}
 
-                                # determine the recognized face with the largest number
-                                # of votes (note: in the event of an unlikely tie Python
-                                # will select first entry in the dictionary)
-                                name = max(counts, key=counts.get)
-                                access = True
-                                ctr = False
-                                locked = False
-                        # update the list of names
-                        names.append(name)        
-                fps.update()
-                        
+                        # loop over the matched indexes and maintain a count for
+                        # each recognized face face
+                        for i in matchedIdxs:
+                                name = data["names"][i]
+                                counts[name] = counts.get(name, 0) + 1
+
+                        # determine the recognized face with the largest number
+                        # of votes (note: in the event of an unlikely tie Python
+                        # will select first entry in the dictionary)
+                        name = max(counts, key=counts.get)
+                        oldtime = time.time()
+                        locked = False
+                # update the list of names
+                names.append(name)
+        '''
         if ((time.time() - oldtime) >= 10 ) and ((not locked) and (ctr)):
-                print("Kilitlendi")
+                locked()
                 locked = True
                 ctr = False
-                oldtime = time.time()
-                
+                oldtime = time.time()     
         if access:
-                print("Kilit açıldı")
+                #unlocked()
                 access = False
                 locked = False
                 ctr = True
                 # update the FPS counter
-                        
-        
+        '''             
+        fps.update()
 
 # stop the timer and display FPS information
 fps.stop()
