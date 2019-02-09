@@ -103,7 +103,7 @@ while True:
         access=access_file.read()
         if (time.time() - oldtime)%20 <2 and not locked:
                 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-                screen.fill((0, 0, 0))
+                screen.fill((255, 0, 0))
                 ctrl = True
                 locked = True
                 
