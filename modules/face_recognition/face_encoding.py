@@ -16,15 +16,8 @@ import os
 import pygame
 import time
 
-#Black screen
-pygame.init()
-pygame.mouse.set_visible(False)
-
-done = False
-# construct the argument parser and parse the arguments
-
 oldtime = time.time()
-ctrl = False
+
 time.sleep(2)
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
@@ -35,20 +28,24 @@ detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # initialize the video stream and allow the camera sensor to warm up
 print("[INFO] starting video stream...")
 vs = VideoStream(src=0).start()
-# vs = VideoStream(usePiCamera=True).start()
 time.sleep(2.0)
+
+#Control variables
+locked = False
+access = False
+ctr = True
 
 # start the FPS counter
 fps = FPS().start()
-locked = False
+
 # loop over frames from the video file stream
 while True:
-        window = vs.read()
-        window = imutils.resize(window, width=1000)
-        if locked:
+        while locked:
+                window = vs.read()
+                window = imutils.resize(window, width=1000)
                 # grab the frame from the threaded video stream and resize it
                 # to 500px (to speedup processing)
-             # convert the input frame from (1) BGR to grayscale (for face
+                # convert the input frame from (1) BGR to grayscale (for face
                 # detection) and (2) from BGR to RGB (for face recognition)
                 gray = cv2.cvtColor(window, cv2.COLOR_BGR2GRAY)
                 rgb = cv2.cvtColor(window, cv2.COLOR_BGR2RGB)
@@ -66,9 +63,10 @@ while True:
                 # compute the facial embeddings for each face bounding box
                 encodings = face_recognition.face_encodings(rgb, boxes)
                 names = []
-
+                print("Starting the procedure")
                 # loop over the facial embeddings
                 for encoding in encodings:
+                        print("FACE ENCODING")
                         # attempt to match each face in the input image to our known
                         # encodings
                         matches = face_recognition.compare_faces(data["encodings"],
@@ -77,6 +75,7 @@ while True:
 
                         # check to see if we have found a match
                         if True in matches:
+                                print("FACE MATCHED")
                                 # find the indexes of all matched faces then initialize a
                                 # dictionary to count the total number of times each face
                                 # was matched
@@ -93,29 +92,27 @@ while True:
                                 # of votes (note: in the event of an unlikely tie Python
                                 # will select first entry in the dictionary)
                                 name = max(counts, key=counts.get)
-                                access_file=open('access.txt','w')
-                                access_file.write('True')
+                                access = True
+                                ctr = False
+                                locked = False
                         # update the list of names
-                        names.append(name)
-                        locked = False
+                        names.append(name)        
+                fps.update()
                         
-        access_file=open('access.txt','r')
-        access=access_file.read()
-        if (time.time() - oldtime)%20 <2 and not locked:
-                screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-                screen.fill((255, 0, 0))
-                ctrl = True
+        if ((time.time() - oldtime) >= 10 ) and ((not locked) and (ctr)):
+                print("Kilitlendi")
                 locked = True
+                ctr = False
+                oldtime = time.time()
                 
-        if ctrl:
-                if access == "True":
-                        pygame.quit()
-                        access_file=open('access.txt','w')
-                        access_file.write('False')
-                        ctrl = False
-                        locked = True
-                        # update the FPS counter
-        fps.update()
+        if access:
+                print("Kilit açıldı")
+                access = False
+                locked = False
+                ctr = True
+                # update the FPS counter
+                        
+        
 
 # stop the timer and display FPS information
 fps.stop()
