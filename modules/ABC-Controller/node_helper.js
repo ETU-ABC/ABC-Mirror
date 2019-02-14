@@ -6,8 +6,142 @@
  */
 
 var NodeHelper = require("node_helper");
+const path = require("path");
+const fs = require("fs");
 
 module.exports = NodeHelper.create({
+
+	start: function() {
+		var self = this;
+
+		console.log("Starting node helper for: " + self.name);
+
+		this.configOnHd = {};
+
+		// store all the available modules
+		this.modulesAvailable = [];
+
+		// store all the installed modules
+		this.modulesInstalled = [];
+
+		// get the current config file
+		this.combineConfig();
+
+		// read the modules
+		this.readModuleData();
+
+		// set api endpoints
+		this.extraRoutes();
+	},
+
+	combineConfig: function() {
+		// function copied from MichMich (MIT)
+		var defaults = require(__dirname + "/../../js/defaults.js");
+		var configFilename = path.resolve(__dirname + "/../../config/config.js");
+		try {
+			fs.accessSync(configFilename, fs.F_OK);
+			var c = require(configFilename);
+			var config = Object.assign({}, defaults, c);
+			this.configOnHd = config;
+		} catch (e) {
+			if (e.code == "ENOENT") {
+				console.error("WARNING! Could not find config file. Please create one. Starting with default configuration.");
+				this.configOnHd = defaults;
+			} else if (e instanceof ReferenceError || e instanceof SyntaxError) {
+				console.error("WARNING! Could not validate config file. Please correct syntax errors. Starting with default configuration.");
+				this.configOnHd = defaults;
+			} else {
+				console.error("WARNING! Could not load config file. Starting with default configuration. Error found: " + e);
+				this.configOnHd = defaults;
+			}
+		}
+	},
+
+	capitalizeFirst: function(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	},
+
+	formatName: function(string) {
+		string = string.replace(/MMM?-/ig, "").replace(/_/g, " ").replace(/-/g, " ");
+		string = string.replace(/([a-z])([A-Z])/g, function(txt){
+			// insert space into camel case
+			return txt.charAt(0) + " " + txt.charAt(1);
+		});
+		string = string.replace(/\w\S*/g, function(txt){
+			// make character after white space upper case
+			return txt.charAt(0).toUpperCase() + txt.substr(1);
+		});
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	},
+
+	readModuleData: function() {
+		var self = this;
+
+		// check for custom installed modules
+		fs.readdir(path.resolve(__dirname + "/.."), function(err, files) {
+			for (var i = 0; i < files.length; i++) {
+				if (files[i] !== "node_modules" && files[i] !== "default") {
+					self.addModule(files[i]);
+				}
+			}
+		});
+	},
+
+	addModule: function(folderName) {
+		var self = this;
+
+		var modulePath = this.configOnHd.paths.modules + "/" + folderName;
+		fs.stat(modulePath, function(err, stats) {
+			if (stats.isDirectory()) {
+				var isInList = false;
+				var currentModule;
+				self.modulesInstalled.push(folderName);
+				for (var i = 0; i < self.modulesAvailable.length; i++) {
+					if (self.modulesAvailable[i].longname === folderName) {
+						isInList = true;
+						self.modulesAvailable[i].installed = true;
+						currentModule = self.modulesAvailable[i];
+					}
+				}
+				if (!isInList) {
+					var newModule = {
+						longname: folderName,
+						name: self.formatName(folderName),
+						isDefaultModule: false,
+						installed: true,
+						author: "unknown",
+						desc: "",
+						id: "local/" + folderName,
+						url: ""
+					};
+					self.modulesAvailable.push(newModule);
+					currentModule = newModule;
+				}
+
+				self.loadModuleDefaultConfig(currentModule, modulePath);
+
+			}
+		});
+	},
+
+	loadModuleDefaultConfig: function(module, modulePath) {
+		// function copied from MichMich (MIT)
+		var filename = path.resolve(modulePath + "/" + module.longname + ".js");
+		try {
+			fs.accessSync(filename, fs.F_OK);
+			var jsfile = require(filename);
+			// module.configDefault = Module.configDefaults[module.longname];
+		} catch (e) {
+			if (e.code == "ENOENT") {
+				console.error("ERROR! Could not find main module js file for " + module.longname);
+			} else if (e instanceof ReferenceError || e instanceof SyntaxError) {
+				console.error("ERROR! Could not validate main module js file.");
+				console.error(e);
+			} else {
+				console.error("ERROR! Could not load main module js file. Error found: " + e);
+			}
+		}
+	},
 
 	// Override socketNotificationReceived method.
 
