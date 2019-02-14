@@ -172,6 +172,10 @@ module.exports = NodeHelper.create({
 			values = self.anotherFunction();
 			res.send(values);
 		});
+
+		this.expressApp.get("/installed_modules", function (req, res) {
+			res.send(self.modulesAvailable);
+		});
 	},
 
 	// Test another function
