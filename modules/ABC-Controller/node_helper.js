@@ -8,6 +8,7 @@
 var NodeHelper = require("node_helper");
 const path = require("path");
 const fs = require("fs");
+const url = require("url");
 
 module.exports = NodeHelper.create({
 
@@ -175,6 +176,19 @@ module.exports = NodeHelper.create({
 
 		this.expressApp.get("/installed_modules", function (req, res) {
 			res.send(self.modulesAvailable);
+		});
+
+		this.expressApp.get("/hide", function(req, res) {
+			var query = url.parse(req.url, true).query;
+			var payload = { module: query.module};
+
+			self.sendSocketNotification(query.action, payload);
+
+			if (res) {
+				res.send({"status": "success"});
+			}
+
+			return true;
 		});
 	},
 

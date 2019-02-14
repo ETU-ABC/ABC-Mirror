@@ -153,5 +153,22 @@ Module.register("ABC-Controller", {
 			this.dataNotification = payload;
 			this.updateDom();
 		}
+
+		if (notification === "HIDE" || notification === "SHOW") {
+			var options = {lockString: this.identifier};
+			var modules = MM.getModules();
+			modules.enumerate(function(module) {
+				if (module.identifier === payload.module) {
+					if (notification === "HIDE") {
+						module.hide(1000, options);
+					} else {
+						if (payload.force) {
+							options.force = true;
+						}
+						module.show(1000, options);
+					}
+				}
+			});
+		}
 	},
 });
