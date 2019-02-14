@@ -1,0 +1,28 @@
+/*
+ *
+ * ABC-EtuShuttleInfo
+ *
+ * burakdmb
+ * MIT Licensed.
+ *
+ * Custom here your css module
+ *
+ */
+
+
+
+ .title{
+    text-align: center;
+}
+
+
+.shuttleTable {
+    border-collapse: collapse !important;
+    font-size: 12px !important;
+    table-layout: fixed !important;
+    width: auto !important;
+}
+
+.shuttleTable, th, td {
+    border: 1px solid white !important;
+}

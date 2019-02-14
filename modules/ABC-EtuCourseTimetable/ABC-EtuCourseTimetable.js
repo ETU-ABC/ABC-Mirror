@@ -50,12 +50,10 @@ Module.register("ABC-EtuCourseTimetable", {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
 					self.processData(JSON.parse(this.response));
-				} else if (this.status === 401) {
-					self.updateDom(self.config.animationSpeed);
-					Log.error(self.name, this.status);
 					retry = false;
-				} else {
-					Log.error(self.name, "Could not load data.");
+				} 
+				else {
+					Log.error(self.name, "Could not load coursetimetable data. HTTP code: ", this.status);
 				}
 				if (retry) {
 					self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);

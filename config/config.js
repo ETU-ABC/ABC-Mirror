@@ -99,6 +99,10 @@ var config = {
 				config: {
 					ogrenciNo: 151201022
 				}
+		},
+		{
+				module: 'ABC-EtuShuttleInfo',
+				position: "bottom_right",
 		}
 	]
 
