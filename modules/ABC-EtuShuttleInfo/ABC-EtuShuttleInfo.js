@@ -9,7 +9,7 @@
 
 Module.register("ABC-EtuShuttleInfo", {
 	defaults: {
-		updateInterval: 60000,
+		updateInterval: 60000*60,	//Updates every hour
 		retryDelay: 5000
 	},
 
@@ -143,6 +143,7 @@ Module.register("ABC-EtuShuttleInfo", {
 function genelTabloOlustur(servisBilgisi) {
 	var date = new Date();
 	var currentHour = date.getHours();
+
 	var currentDay = date.getDay();
 	var dayIndex=(currentDay==6)? 1:0;
 	
@@ -181,6 +182,8 @@ function genelTabloOlustur(servisBilgisi) {
 		td1.appendChild(document.createTextNode(servisBilgisi[dayIndex][i][1]));
 		td2.appendChild(document.createTextNode(servisBilgisi[dayIndex][i][2]));
 		td3.appendChild(document.createTextNode(servisBilgisi[dayIndex][i][3]));
+		
+		//td3.appendChild(document.createTextNode(servisBilgisi[dayIndex][i][3].charAt(0).toUpperCase()+servisBilgisi[dayIndex][i][3].substr(1).toLowerCase()));
 		tr.appendChild(td1);
 		tr.appendChild(td2);
 		tr.appendChild(td3);

@@ -18,11 +18,13 @@
 
 .customtable {
     border-collapse: collapse !important;
-    font-size: 12px !important;
+    font-size: medium !important;
     table-layout: fixed !important;
     width: auto !important;
+    line-height:normal;
+    text-align: center;
 }
 
-.customtable, th, td {
+.customtable th, .customtable td {
     border: 1px solid white !important;
 }

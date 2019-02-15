@@ -18,11 +18,9 @@
 
 .shuttleTable {
     border-collapse: collapse !important;
-    font-size: 12px !important;
+    font-size: medium !important;
     table-layout: fixed !important;
     width: auto !important;
-}
-
-.shuttleTable, th, td {
-    border: 1px solid white !important;
+    line-height:normal;
+    text-align: center;
 }

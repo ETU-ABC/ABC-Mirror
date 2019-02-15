@@ -102,7 +102,7 @@ var config = {
 		},
 		{
 				module: 'ABC-EtuShuttleInfo',
-				position: "bottom_right",
+				position: "bottom_left",
 		}
 	]
 

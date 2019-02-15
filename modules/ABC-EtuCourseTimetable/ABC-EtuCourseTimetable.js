@@ -22,12 +22,8 @@ Module.register("ABC-EtuCourseTimetable", {
 
 		//Flag for check if module is loaded
 		this.loaded = false;
-
-		// Schedule update timer.
 		this.getData();
-		setInterval(function() {
-			self.updateDom();
-		}, this.config.updateInterval);
+		self.updateDom();
 	},
 
 	/*
@@ -97,7 +93,8 @@ Module.register("ABC-EtuCourseTimetable", {
 			//								"<br>Haftalık ders saati sayısı: "+this.dataRequest.saatsayisi;
 
 			//wrapper.appendChild(wrapperDataRequest);
-			wrapper.appendChild(tabloOlustur(this.config.ogrenciNo, this.dataRequest.grid));
+			//wrapper.appendChild(tabloOlustur(this.config.ogrenciNo, this.dataRequest.grid));
+			wrapper.appendChild(gunlukTabloOlustur(this.config.ogrenciNo, this.dataRequest.grid));
 			
 		}
 
@@ -282,6 +279,76 @@ function tabloOlustur(ogrencino,grid) {
 		tr.appendChild(td4);
 		tr.appendChild(td5);
 		tr.appendChild(td6);
+		programPanel.appendChild(tr);
+	}
+	table.appendChild(programPanel);
+	return table;
+}
+
+
+function gunlukTabloOlustur(ogrencino,grid) {
+	var table = document.createElement("table");
+	table.className="customtable";
+
+	var tablehead = document.createElement("thead");
+	
+	var tr = document.createElement("tr");
+	tr.className="title";
+
+	var th0 = document.createElement("th");
+	var day0 = document.createTextNode("151201022");
+	//day0.className="title";
+	th0.appendChild(day0);
+	tr.appendChild(th0);
+
+	var th1 = document.createElement("th");
+	var day1 = document.createTextNode("Bugün");
+	th1.appendChild(day1);
+	tr.appendChild(th1);
+
+	tablehead.appendChild(tr);
+	table.appendChild(tablehead);
+	var date = new Date();
+	var gunIndex = (date.getDay()+6) % 7;
+
+	var programPanel = document.createElement("tbody");
+	for(var i=0;i<13;i++){
+		var saat1 = 8+i;
+		var saat2= saat1+1;
+		var tr = document.createElement('tr');
+		var th = document.createElement('th');
+		var td1 = document.createElement('td');
+		var td2 = document.createElement('td');
+		var td3 = document.createElement('td');
+		var td4 = document.createElement('td');
+		var td5 = document.createElement('td');
+		var td6 = document.createElement('td');
+		var text1 = document.createTextNode(saat1+".30-"+saat2+".20");
+		th.appendChild(text1);
+		var text2 = document.createTextNode('-');
+		var text3 = document.createTextNode('-');
+		var text4 = document.createTextNode('-');
+		var text5 = document.createTextNode('-');
+		var text6 = document.createTextNode('-');
+		var text7 = document.createTextNode('-');
+		
+		if(grid[i]!=null){
+			var tmpstr="";
+			if(grid[i][gunIndex]!=null){
+				tmpstr="";
+				for (var cakisma in grid[i][gunIndex]){
+					tmpstr=tmpstr+grid[i][gunIndex][cakisma]+" ";
+				}
+				text2 = document.createTextNode(tmpstr);
+			}
+			
+		}
+		th.scope="row";
+		th.className="text-white ";
+		td1.appendChild(text2);
+
+		tr.appendChild(th);
+		tr.appendChild(td1);
 		programPanel.appendChild(tr);
 	}
 	table.appendChild(programPanel);
