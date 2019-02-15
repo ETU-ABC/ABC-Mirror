@@ -105,7 +105,10 @@ var config = {
     {
         module: 'ABC-EtuShuttleInfo',
 				position: "bottom_left",
-    }
+    },
+	{
+	module: 'ABC-Controller'
+}
 	]
 
 };
