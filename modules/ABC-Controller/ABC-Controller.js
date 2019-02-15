@@ -189,7 +189,13 @@ Module.register("ABC-Controller", {
 					console.log("module config updated: ", module.config);
 				}
 			});
+		}
 
+		if (notification === 'HIDE_ALL') {
+			var modules = MM.getModules();
+			modules.enumerate(function (module) {
+				module.hide(1000, options);
+			})
 		}
 	},
 });
