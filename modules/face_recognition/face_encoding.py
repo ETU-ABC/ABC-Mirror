@@ -6,6 +6,7 @@ import imutils
 import pickle
 import time
 import cv2
+import requests
 
 #Initial variables
 oldtime = time.time()
@@ -26,11 +27,11 @@ time.sleep(2.0)
 
 #hide modules
 def unlock():
-        print("Kilit açıldı")
+        requests.get("http://10.5.42.112:8080/show_all")
         
 #Display modules
 def lock():
-        print("Kilitlendi")
+        requests.get("http://10.5.42.112:8080/hide_all")
         
 # start the FPS counter
 fps = FPS().start()
