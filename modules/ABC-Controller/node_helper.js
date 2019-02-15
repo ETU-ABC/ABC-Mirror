@@ -193,7 +193,7 @@ module.exports = NodeHelper.create({
 			res.send(values);
 		});
 
-		this.expressApp.get("/installed_modules", function (req, res) {
+		this.expressApp.get("/all_modules", function (req, res) {
 			res.send(self.modulesAvailable);
 		});
 
@@ -210,11 +210,12 @@ module.exports = NodeHelper.create({
 			return true;
 		});
 
-		this.expressApp.get("/edit", function(req, res) {
+		this.expressApp.post("/edit", function(req, res) {
+			// ogrenciNo is in the JSON body of post request
 			var query = url.parse(req.url, true).query;
-			var payload = { module: query.module};
+			var payload = { module: query.module, ogrenciNo: req.body.ogrenciNo};
 
-			self.sendSocketNotification(query.action, payload);
+			self.sendSocketNotification("EDIT", payload);
 
 			if (res) {
 				res.send({"status": "success"});
