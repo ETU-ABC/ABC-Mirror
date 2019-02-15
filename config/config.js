@@ -96,15 +96,15 @@ var config = {
 				}
 		},
     {
-				module: 'ABC-EtuShuttleInfo',
-				position: "bottom_left",
-    },
-    {
-				module: 'ABC-EtuExamTimetable',
-				position: "bottom_right",
-				config: {
+				module: 'ABC-EtuExamTimeTable',
+				position: "top_center",
+        config: {
 					ogrenciNo: 151201012
 				}
+    },
+    {
+        module: 'ABC-EtuShuttleInfo',
+				position: "bottom_left",
     }
 	]
 
