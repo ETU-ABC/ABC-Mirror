@@ -94,6 +94,13 @@ var config = {
 				config: {
 					ogrenciNo: 151201022
 				}
+		},
+    {
+				module: 'ABC-EtuExamTimetable',
+				position: "bottom_right",
+				config: {
+					ogrenciNo: 151201012
+				}
 		}
 	]
 
