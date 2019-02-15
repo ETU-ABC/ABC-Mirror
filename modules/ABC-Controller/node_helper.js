@@ -10,6 +10,8 @@ const path = require("path");
 const fs = require("fs");
 const url = require("url");
 
+var defaultModules = require(path.resolve(__dirname + "/../default/defaultmodules.js"));
+
 module.exports = NodeHelper.create({
 
 	start: function() {
@@ -77,6 +79,23 @@ module.exports = NodeHelper.create({
 
 	readModuleData: function() {
 		var self = this;
+
+		// append default modules
+		for (var i = 0; i < defaultModules.length; i++) {
+			self.modulesAvailable.push({
+				longname: defaultModules[i],
+				name: self.capitalizeFirst(defaultModules[i]),
+				isDefaultModule: true,
+				installed: true,
+				author: "MichMich",
+				desc: "",
+				id: "MichMich/MagicMirror",
+				url: "https://github.com/MichMich/MagicMirror/wiki/MagicMirror%C2%B2-Modules#default-modules"
+			});
+			var module = self.modulesAvailable[self.modulesAvailable.length - 1];
+			var modulePath = self.configOnHd.paths.modules + "/default/" + defaultModules[i];
+			self.loadModuleDefaultConfig(module, modulePath);
+		}
 
 		// check for custom installed modules
 		fs.readdir(path.resolve(__dirname + "/.."), function(err, files) {
