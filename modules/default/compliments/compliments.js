@@ -200,3 +200,4 @@ Module.register("compliments", {
 	},
 
 });
+

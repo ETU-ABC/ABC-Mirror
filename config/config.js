@@ -21,7 +21,7 @@ var config = {
 	                                                       // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
 	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
 
-	language: "en",
+	language: "tr",
 	timeFormat: 24,
 	units: "metric",
 
@@ -29,12 +29,12 @@ var config = {
 		{
 			module: "alert",
 		},
-		// {
-   		// 	module: 'MMM-Remote-Control',
-    	// 		// uncomment the following line to show the URL of the remote control on the mirror
-    	// 		position: 'bottom_left'
-    	// 		// you can hide this module afterwards from the remote control itself
-		// },
+		{
+   			module: 'MMM-Remote-Control',
+    			// uncomment the following line to show the URL of the remote control on the mirror
+    			position: 'bottom_left'
+    			// you can hide this module afterwards from the remote control itself
+		},
 		{
 			module: "updatenotification",
 			position: "top_bar"
@@ -44,60 +44,62 @@ var config = {
 			position: "top_left"
 		},
 		{
-			module: "calendar",
-			header: "US Holidays",
-			position: "top_left",
+			module: "compliments",
+			position: "lower_third",
 			config: {
-				calendars: [
-					{
-						symbol: "calendar-check",
-						url: "webcal://www.calendarlabs.com/templates/ical/US-Holidays.ics"
-					}
-				]
+				compliments: {
+					anytime: [
+						"Her sey guzel olacak :)"
+					],
+					morning: [
+						"Bugun guzel bir gun olacak :)",
+						"Iyi uyudun mu?",
+						"Yeni bir güne hazır mısınz?"
+					],
+					afternoon: [
+						"Gun ortasina kadar neler basardin?",
+						"Bugun cok iyi gorunuyorsun!",
+						"Isiltinin sirri ne?"
+					],
+					evening: [
+						"Yorucu bir gundu haa?",
+						"Bugunu nasil sonlandiracaksin? Bir film?",
+						"Sanirim artik keyif zamani"
+					]
+				}
 			}
 		},
+		//***{
+		//	module: "currentweather",
+		//	position: "top_right",
+		//	config: {
+		//		location: "New York",
+		//		locationID: "",  //ID from http://bulk.openweathermap.org/sample/; unzip the gz file and find your city
+		//		appid: "YOUR_OPENWEATHER_API_KEY"
+		//	}
+		//},
+		//{
+		//	module: "weatherforecast",
+		//	position: "top_right",
+		//	header: "Weather Forecast",
+		//	config: {
+		//		location: "New York",
+		//		locationID: "5128581",  //ID from https://openweathermap.org/city
+		//		appid: "YOUR_OPENWEATHER_API_KEY"
+		//	}
+		//},
 		{
-			module: "compliments",
-			position: "lower_third"
-		},
-		// {
-		// 	module: "currentweather",
-		// 	position: "top_right",
-		// 	config: {
-		// 		location: "New York",
-		// 		locationID: "",  //ID from http://bulk.openweathermap.org/sample/; unzip the gz file and find your city
-		// 		appid: "YOUR_OPENWEATHER_API_KEY"
-		// 	}
-		// },
-		// {
-		// 	module: "weatherforecast",
-		// 	position: "top_right",
-		// 	header: "Weather Forecast",
-		// 	config: {
-		// 		location: "New York",
-		// 		locationID: "5128581",  //ID from https://openweathermap.org/city
-		// 		appid: "YOUR_OPENWEATHER_API_KEY"
-		// 	}
-		// },
-		// {
-		// 	module: "newsfeed",
-		// 	position: "bottom_bar",
-		// 	config: {
-		// 		feeds: [
-		// 			{
-		// 				title: "New York Times",
-		// 				url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-		// 			}
-		// 		],
-		// 		showSourceTitle: true,
-		// 		showPublishDate: true
-		// 	}
-		// },
-		{
-				module: 'ABC-EtuExamTimeTable',
+				module: 'ABC-EtuCourseTimetable',
 				position: "top_right",
 				config: {
 					ogrenciNo: 151201022
+				}
+		},
+    {
+				module: 'ABC-EtuExamTimetable',
+				position: "bottom_right",
+				config: {
+					ogrenciNo: 151201012
 				}
 		}
 	]
