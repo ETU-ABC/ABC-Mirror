@@ -98,10 +98,14 @@ var config = {
     {
 				module: 'ABC-EtuExamTimeTable',
 				position: "top_center",
-				config: {
+        config: {
 					ogrenciNo: 151201012
 				}
-		}
+    },
+    {
+        module: 'ABC-EtuShuttleInfo',
+				position: "bottom_left",
+    }
 	]
 
 };
