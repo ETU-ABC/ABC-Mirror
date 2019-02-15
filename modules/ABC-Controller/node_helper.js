@@ -190,6 +190,19 @@ module.exports = NodeHelper.create({
 
 			return true;
 		});
+
+		this.expressApp.get("/edit", function(req, res) {
+			var query = url.parse(req.url, true).query;
+			var payload = { module: query.module};
+
+			self.sendSocketNotification(query.action, payload);
+
+			if (res) {
+				res.send({"status": "success"});
+			}
+
+			return true;
+		});
 	},
 
 	// Test another function

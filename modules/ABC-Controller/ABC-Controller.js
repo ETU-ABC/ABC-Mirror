@@ -170,5 +170,19 @@ Module.register("ABC-Controller", {
 				}
 			});
 		}
+
+		if (notification === 'EDIT') {
+			var modules = MM.getModules();
+			modules.enumerate(function(module) {
+				if (module.identifier === payload.module) {
+					if (notification === "EDIT") {
+						// TODO - cemal check payload and update
+						console.log("show week", module.config.showWeek);
+						module.config.showWeek = true;
+					}
+				}
+			});
+
+		}
 	},
 });
