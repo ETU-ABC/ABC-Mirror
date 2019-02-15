@@ -184,9 +184,6 @@ Module.register("ABC-Controller", {
 							module.config.ogrenciNo = ogrenciNo;
 						}
 					}
-					// TODO - cemal check payload and update
-					// module.config.ogrenciNo = payload.ogrenciNo;
-					console.log("module config updated: ", module.config);
 				}
 			});
 		}
