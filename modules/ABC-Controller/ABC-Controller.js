@@ -158,7 +158,7 @@ Module.register("ABC-Controller", {
 			var options = {lockString: this.identifier};
 			var modules = MM.getModules();
 			modules.enumerate(function(module) {
-				if (module.identifier === payload.module) {
+				if (module.identifier.includes(payload.module)) {
 					if (notification === "HIDE") {
 						module.hide(1000, options);
 					} else {
@@ -174,12 +174,19 @@ Module.register("ABC-Controller", {
 		if (notification === 'EDIT') {
 			var modules = MM.getModules();
 			modules.enumerate(function(module) {
-				if (module.identifier === payload.module) {
-					if (notification === "EDIT") {
-						// TODO - cemal check payload and update
-						console.log("show week", module.config.showWeek);
-						module.config.showWeek = true;
+				if (module.identifier.includes(payload.module)) {
+					if (payload.module === 'ABC-EtuCoursetimetable'
+						|| payload.module === 'ABC-EtuExamTimeTable') {
+
+						// check if we have ogrenciNo as parameter
+						if (payload.ogrenciNo) {
+							const ogrenciNo = parseInt(payload.ogrenciNo);
+							module.config.ogrenciNo = ogrenciNo;
+						}
 					}
+					// TODO - cemal check payload and update
+					// module.config.ogrenciNo = payload.ogrenciNo;
+					console.log("module config updated: ", module.config);
 				}
 			});
 
