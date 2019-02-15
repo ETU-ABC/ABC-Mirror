@@ -96,8 +96,8 @@ var config = {
 				}
 		},
     {
-				module: 'ABC-EtuExamTimetable',
-				position: "bottom_right",
+				module: 'ABC-EtuExamTimeTable',
+				position: "top_center",
 				config: {
 					ogrenciNo: 151201012
 				}

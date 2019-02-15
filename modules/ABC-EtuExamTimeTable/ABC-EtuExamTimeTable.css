@@ -9,6 +9,10 @@
  *
  */
 
+.title{
+    text-align: center;
+}
+
 .myTable {
     border-collapse: collapse !important;
     font-size: 14px !important;

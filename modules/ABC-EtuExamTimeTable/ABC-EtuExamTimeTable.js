@@ -233,7 +233,7 @@ function examTimeTable(ogrencino, exam_details) {
 	// console.log("in tablo olustur", exam_details);
 
 	var table = document.createElement("table");
-	table.className="customtable";
+	table.className="myTable";
 
 	var tablehead = document.createElement("thead");
 
