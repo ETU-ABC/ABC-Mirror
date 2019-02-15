@@ -230,6 +230,14 @@ module.exports = NodeHelper.create({
 			if (res) {
 				res.send({"message": "All modules are hidden!"});
 			}
+		});
+
+		this.expressApp.get('/show_all', function(req, res) {
+			self.sendSocketNotification("SHOW_ALL");
+
+			if (res) {
+				res.send({"message": "All modules are showed!"});
+			}
 		})
 	},
 

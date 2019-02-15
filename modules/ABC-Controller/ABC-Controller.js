@@ -197,5 +197,12 @@ Module.register("ABC-Controller", {
 				module.hide(1000, options);
 			})
 		}
+
+		if (notification === 'SHOW_ALL') {
+			var modules = MM.getModules();
+			modules.enumerate(function (module) {
+				module.show(1000, options);
+			})
+		}
 	},
 });
