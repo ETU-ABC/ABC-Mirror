@@ -15,12 +15,14 @@
 
 .myTable {
     border-collapse: collapse !important;
-    font-size: 14px !important;
+    font-size: medium !important;
     table-layout: fixed !important;
     width: auto !important;
+    line-height:normal;
+    text-align: center;
 }
 
-.myTable th, .myTable td {
-    border: 1px solid white !important;
-    text-align: center;
+.myTable td, .myTable th
+{
+    padding:0 15px 0 15px;
 }

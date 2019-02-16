@@ -153,6 +153,9 @@ function tabloOlustur(ogrencino,grid) {
 	var table = document.createElement("table");
 	table.className="customtable";
 
+
+	var dersprogYazisi= document.createTextNode("Ders Programı");
+	table.appendChild(dersprogYazisi);
 	var tablehead = document.createElement("thead");
 	
 	var tr = document.createElement("tr");
@@ -349,7 +352,10 @@ function gunlukTabloOlustur(ogrencino,grid) {
 
 		tr.appendChild(th);
 		tr.appendChild(td1);
-		programPanel.appendChild(tr);
+		console.log(text2);
+		if(text2.length > 0 ){
+			programPanel.appendChild(tr);
+		}
 	}
 	table.appendChild(programPanel);
 	return table;

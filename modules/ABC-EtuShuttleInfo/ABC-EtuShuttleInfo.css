@@ -24,3 +24,8 @@
     line-height:normal;
     text-align: center;
 }
+
+.shuttleTable td, .shuttleTable th
+{
+    padding:0 15px 0 15px;
+}
