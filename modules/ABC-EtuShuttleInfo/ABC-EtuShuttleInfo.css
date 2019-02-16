@@ -24,6 +24,9 @@
     line-height:normal;
     text-align: center;
 }
+.shuttleDiv {
+    text-align: center;
+}
 
 .shuttleTable td, .shuttleTable th
 {

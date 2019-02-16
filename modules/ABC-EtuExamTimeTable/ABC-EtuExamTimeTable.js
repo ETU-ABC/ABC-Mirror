@@ -231,6 +231,12 @@ Module.register("ABC-EtuExamTimeTable", {
 
 function examTimeTable(ogrencino, exam_details) {
 	// console.log("in tablo olustur", exam_details);
+	var div = document.createElement("div");
+	var header = document.createElement("h4");
+	header.appendChild(document.createTextNode("Sınav Programı"));
+	div.appendChild(header);
+	div.className="myTableDiv";
+
 
 	var table = document.createElement("table");
 	table.className="myTable";
@@ -293,5 +299,6 @@ function examTimeTable(ogrencino, exam_details) {
 		programPanel.appendChild(tr);
 	}
 	table.appendChild(programPanel);
-	return table;
+	div.appendChild(table);
+	return div;
 }

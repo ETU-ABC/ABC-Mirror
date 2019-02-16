@@ -26,6 +26,10 @@
 }
 
 
+.customtableDiv {
+    text-align: center;
+}
+
 .customtable td, .customtable th
 {
     padding:0 15px 0 15px;

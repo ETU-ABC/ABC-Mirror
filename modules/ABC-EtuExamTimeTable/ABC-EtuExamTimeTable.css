@@ -22,6 +22,10 @@
     text-align: center;
 }
 
+.myTableDiv {
+    text-align: center;
+}
+
 .myTable td, .myTable th
 {
     padding:0 15px 0 15px;

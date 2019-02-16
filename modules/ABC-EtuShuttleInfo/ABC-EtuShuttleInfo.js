@@ -146,6 +146,12 @@ function genelTabloOlustur(servisBilgisi) {
 
 	var currentDay = date.getDay();
 	var dayIndex=(currentDay==6)? 1:0;
+
+	var div = document.createElement("div");
+	var header = document.createElement("h4");
+	header.appendChild(document.createTextNode("Ring Saatleri"));
+	div.appendChild(header);
+	div.className="shuttleDiv";
 	
 	var table = document.createElement("table");
 	table.className="shuttleTable";
@@ -193,5 +199,6 @@ function genelTabloOlustur(servisBilgisi) {
 		}
 	}
 	table.appendChild(shuttlePanel);
-	return table;
+	div.appendChild(table);
+	return div;
 }

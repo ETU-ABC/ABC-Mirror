@@ -94,6 +94,7 @@ Module.register("ABC-EtuCourseTimetable", {
 
 			//wrapper.appendChild(wrapperDataRequest);
 			//wrapper.appendChild(tabloOlustur(this.config.ogrenciNo, this.dataRequest.grid));
+			
 			wrapper.appendChild(gunlukTabloOlustur(this.config.ogrenciNo, this.dataRequest.grid));
 			
 		}
@@ -290,6 +291,13 @@ function tabloOlustur(ogrencino,grid) {
 
 
 function gunlukTabloOlustur(ogrencino,grid) {
+	var div = document.createElement("div");
+	var header = document.createElement("h4");
+	header.appendChild(document.createTextNode("Ders Programı"));
+	div.appendChild(header);
+
+	div.className="customtableDiv";
+	
 	var table = document.createElement("table");
 	table.className="customtable";
 
@@ -358,5 +366,6 @@ function gunlukTabloOlustur(ogrencino,grid) {
 		}
 	}
 	table.appendChild(programPanel);
-	return table;
+	div.appendChild(table);
+	return div;
 }
