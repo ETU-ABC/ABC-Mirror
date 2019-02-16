@@ -39,7 +39,8 @@ for (i, imagePath) in enumerate(imagePaths):
 		knownNames.append(name)
 
 # dump the facial encodings + names to disk
-print("Encodings...")
+print("[INFO] Encode edildi.")
+print("[INFO] Modul baslatiliyor. Lutfen magicmirrori acin.")
 data = {"encodings": knownEncodings, "names": knownNames}
 f = open("encodings.pickle", "wb")
 f.write(pickle.dumps(data))

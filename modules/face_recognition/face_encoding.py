@@ -16,7 +16,7 @@ time.sleep(2)
 
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
-print("[INFO] loading encodings + face detector...")
+print("[INFO] encode dosyasi + face detector okunuyor.")
 data = pickle.loads(open('encodings.pickle', "rb").read())
 detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
@@ -27,12 +27,12 @@ time.sleep(2.0)
 
 #hide modules
 def unlock():
-        requests.get("http://10.5.42.112:8080/show_all")
-        
+        requests.get("http://localhost:8080/show_all")
+        print("Kilit Acildi")
 #Display modules
 def lock():
-        requests.get("http://10.5.42.112:8080/hide_all")
-        
+        requests.get("http://localhost:8080/hide_all")
+        print("Kilitlendi")
 # start the FPS counter
 fps = FPS().start()
 
@@ -92,7 +92,7 @@ while True:
                         for i in matchedIdxs:
                                 name = data["names"][i]
                                 counts[name] = counts.get(name, 0) + 1
-
+                        print(name)
                         # determine the recognized face with the largest number
                         # of votes (note: in the event of an unlikely tie Python
                         # will select first entry in the dictionary)
