@@ -27,11 +27,11 @@ time.sleep(2.0)
 
 #hide modules
 def unlock():
-        requests.get("http://localhost:8080/show_all")
+        #requests.get("http://localhost:8080/show_all")
         print("Kilit Acildi")
 #Display modules
 def lock():
-        requests.get("http://localhost:8080/hide_all")
+        #requests.get("http://localhost:8080/hide_all")
         print("Kilitlendi")
 # start the FPS counter
 fps = FPS().start()
@@ -70,8 +70,7 @@ while True:
         for encoding in encodings:
                 # attempt to match each face in the input image to our known
                 # encodings
-                matches = face_recognition.compare_faces(data["encodings"],
-                        encoding)
+                matches = face_recognition.compare_faces(data["encodings"],encoding,tolerance=0.4)
                 name = "Unknown"
 
                 # check to see if we have found a match
@@ -92,7 +91,7 @@ while True:
                         for i in matchedIdxs:
                                 name = data["names"][i]
                                 counts[name] = counts.get(name, 0) + 1
-                                
+                        print(name)     
                         # determine the recognized face with the largest number
                         # of votes (note: in the event of an unlikely tie Python
                         # will select first entry in the dictionary)
