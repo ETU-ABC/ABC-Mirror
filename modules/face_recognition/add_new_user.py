@@ -12,7 +12,7 @@ time.sleep(0.5)
 if not os.path.exists("dataset/{}".format(directory)):
     os.makedirs("dataset/{}".format(directory))
 oldtime = time.time()
-while time.time()-oldtime < 5:
+while time.time()-oldtime < 6:
     image = vs.read()
     cv2.imwrite('dataset/{}/opencv'.format(directory)+str(i)+'.png', image)
     time.sleep(0.1)
