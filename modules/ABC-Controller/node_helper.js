@@ -213,7 +213,7 @@ module.exports = NodeHelper.create({
 		this.expressApp.post("/edit", function(req, res) {
 			// ogrenciNo is in the JSON body of post request
 			var query = url.parse(req.url, true).query;
-			var payload = { module: query.module, ogrenciNo: req.body.ogrenciNo};
+			var payload = { module: query.module, content: req.body.content};
 
 			self.sendSocketNotification("EDIT", payload);
 

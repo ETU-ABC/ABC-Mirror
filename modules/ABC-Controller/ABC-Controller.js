@@ -175,12 +175,12 @@ Module.register("ABC-Controller", {
 			var modules = MM.getModules();
 			modules.enumerate(function(module) {
 				if (module.identifier.includes(payload.module)) {
-					if (payload.module === 'ABC-EtuCoursetimetable'
+					if (payload.module === 'ABC-EtuCourseTimetable'
 						|| payload.module === 'ABC-EtuExamTimeTable') {
 
 						// check if we have ogrenciNo as parameter
-						if (payload.ogrenciNo) {
-							const ogrenciNo = parseInt(payload.ogrenciNo);
+						if (payload.content && payload.content.ogrenciNo) {
+							const ogrenciNo = parseInt(payload.content.ogrenciNo);
 							module.config.ogrenciNo = ogrenciNo;
 						}
 					}
