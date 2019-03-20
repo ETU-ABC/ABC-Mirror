@@ -184,6 +184,18 @@ Module.register("ABC-Controller", {
 							module.config.ogrenciNo = ogrenciNo;
 						}
 					}
+
+					if (payload.module === 'currentweather') {
+						// check payload for locationID
+						if (payload.content && payload.content.locationID) {
+							module.config.locationID = payload.content.locationID;
+							// since we know the current module is
+							// an object with updateWeather
+							module.updateWeather();
+						} else {
+							console.log("Error on payload for current weather!");
+						}
+					}
 				}
 			});
 		}
