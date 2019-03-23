@@ -4,10 +4,10 @@ import argparse
 import pickle
 import cv2
 import os
-
+print("[INFO] Encode islemi basliyor. Bu islem birkac saniye surecek")
 # grab the paths to the input images in our dataset
 
-imagePaths = list(paths.list_images("dataset"))
+imagePaths = list(paths.list_images("modules/face_recognition/dataset"))
 
 # initialize the list of known encodings and known names
 knownEncodings = []
@@ -42,6 +42,6 @@ for (i, imagePath) in enumerate(imagePaths):
 print("[INFO] Encode edildi.")
 print("[INFO] Modul baslatiliyor. Lutfen magicmirrori acin.")
 data = {"encodings": knownEncodings, "names": knownNames}
-f = open("encodings.pickle", "wb")
+f = open("modules/face_recognition/encodings.pickle", "wb")
 f.write(pickle.dumps(data))
 f.close()
