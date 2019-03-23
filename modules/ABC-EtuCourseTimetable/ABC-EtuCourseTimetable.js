@@ -45,6 +45,7 @@ Module.register("ABC-EtuCourseTimetable", {
 		dataRequest.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
+					console.log("Getting course time table for student: ", self.config.ogrenciNo);
 					self.processData(JSON.parse(this.response));
 					retry = false;
 				} 
