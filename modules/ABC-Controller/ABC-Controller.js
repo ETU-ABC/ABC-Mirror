@@ -196,7 +196,8 @@ Module.register("ABC-Controller", {
 							console.log("Error on payload for current weather!");
 						}
 					}
-					if (payload.module === 'MMM-AlarmClock') {
+
+					if (payload.module === 'module_9_MMM-AlarmClock') {
 						// check payload for locationID
 						if (payload.content && payload.content.time && payload.content.days) {
 							var days = [];
@@ -221,10 +222,42 @@ Module.register("ABC-Controller", {
 							if(payload.content.days.sunday==1){
 								days.push(7);
 							}
+							if(days.length==0){
+								days=[1,2,3,4,5,6,7];
+							}
 							module.config.alarms.push({time: payload.content.time, days: days, title: "Alarm", message: "Alarm!", sound: "alarm.mp3"})
 							// since we know the current module is
 							// an object with alarmclock
 							module.resetAlarmClock();
+							console.log("CLOCK-"+payload.content.time);
+						} else {
+							console.log("Error on payload for alarm clock!");
+						}
+						
+					}
+					if (payload.module === 'module_10_email') {
+						// check payload for locationID
+						if (payload.content && payload.content.email && payload.content.password 
+							&& payload.content.mailserver) {
+
+							console.log(payload.content);
+							module.config.accounts.push(
+								{
+									user: payload.content.email,
+									password: payload.content.password,
+									host: payload.content.mailserver,
+									port: parseInt(payload.content.port),
+									tls: true,
+									authTimeout: 10000,
+									numberOfEmails: 2,
+								}
+							)
+							// since we know the current module is
+							// an object with alarmclock
+							module.updateDom(2000);
+
+							console.log(module.config.accounts);
+							
 						} else {
 							console.log("Error on payload for alarm clock!");
 						}
