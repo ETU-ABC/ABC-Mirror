@@ -106,9 +106,19 @@ var config = {
         module: 'ABC-EtuShuttleInfo',
 				position: "bottom_left",
     },
-	{
-	module: 'ABC-Controller'
-}
+		{
+				module: 'ABC-Controller'
+		},
+		{
+				module: 'MMM-AlarmClock',
+				position: 'top_right',
+				config: {
+						alarms: [
+
+						]
+				}
+		}
+
 	]
 
 };

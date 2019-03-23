@@ -196,6 +196,40 @@ Module.register("ABC-Controller", {
 							console.log("Error on payload for current weather!");
 						}
 					}
+					if (payload.module === 'MMM-AlarmClock') {
+						// check payload for locationID
+						if (payload.content && payload.content.time && payload.content.days) {
+							var days = [];
+							if(payload.content.days.monday==1){
+								days.push(1);
+							}
+							if(payload.content.days.tuesday==1){
+								days.push(2);
+							}
+							if(payload.content.days.wednesday==1){
+								days.push(3);
+							}
+							if(payload.content.days.thursday==1){
+								days.push(4);
+							}
+							if(payload.content.days.friday==1){
+								days.push(5);
+							}
+							if(payload.content.days.saturday==1){
+								days.push(6);
+							}
+							if(payload.content.days.sunday==1){
+								days.push(7);
+							}
+							module.config.alarms.push({time: payload.content.time, days: days, title: "Alarm", message: "Alarm!", sound: "alarm.mp3"})
+							// since we know the current module is
+							// an object with alarmclock
+							module.resetAlarmClock();
+						} else {
+							console.log("Error on payload for alarm clock!");
+						}
+						
+					}
 				}
 			});
 		}
