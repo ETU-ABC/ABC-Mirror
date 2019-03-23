@@ -17,8 +17,8 @@ time.sleep(2)
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
 print("[INFO] encode dosyasi + face detector okunuyor.")
-data = pickle.loads(open('encodings.pickle', "rb").read())
-detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+data = pickle.loads(open('modules/face_recognition/encodings.pickle', "rb").read())
+detector = cv2.CascadeClassifier('modules/face_recognition/haarcascade_frontalface_default.xml')
 
 # initialize the video stream and allow the camera sensor to warm up
 print("[INFO] starting video stream...")
@@ -27,11 +27,11 @@ time.sleep(2.0)
 
 #hide modules
 def unlock():
-        #requests.get("http://localhost:8080/show_all")
+        requests.get("http://localhost:8080/show_all")
         print("Kilit Acildi")
 #Display modules
 def lock():
-        #requests.get("http://localhost:8080/hide_all")
+        requests.get("http://localhost:8080/hide_all")
         print("Kilitlendi")
 # start the FPS counter
 fps = FPS().start()
