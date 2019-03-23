@@ -4,6 +4,7 @@ import argparse
 import pickle
 import cv2
 import os
+
 print("[INFO] Encode islemi basliyor. Bu islem birkac saniye surecek")
 # grab the paths to the input images in our dataset
 
