@@ -131,6 +131,17 @@ var config = {
 
 						]
 				}
+		},
+		{
+			module: 'email',
+				position: 'bottom_left',
+				header: 'Email',
+				config: {
+						accounts: [
+						],
+						fade: true,
+						maxCharacters: 30
+				}
 		}
 
 	]
