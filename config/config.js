@@ -45,13 +45,13 @@ var config = {
 		},
 		{
 			module: "calendar",
-			position: "bottom_left",	// This can be any of the regions. Best results in left or right regions.
+			position: "bottom_right",	// This can be any of the regions. Best results in left or right regions.
 			config: {
 					calendars: [
 						{
 							symbol: "calendar-check-o",
 							url: "https://calendar.google.com/calendar/ical/aalperenelbasan%40gmail.com/private-0c2094d5f955c491c2a0eacb933da98b/basic.ics",
-							maximumEntries: 3,
+							maximumEntries: 9,
 						}
 					]
 			}
