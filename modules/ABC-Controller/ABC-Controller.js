@@ -198,6 +198,15 @@ Module.register("ABC-Controller", {
 						}
 					}
 
+					if (payload.module === 'calendar') {
+						// check payload for url
+						if (payload.content && payload.content.url) {
+							console.log("module calendar, url", payload.content.url);
+							module.config.calendars[0].url = payload.content.url;
+							module.start();
+						}
+					}
+
 					if (payload.module === 'module_9_MMM-AlarmClock') {
 						// check payload for locationID
 						if (payload.content && payload.content.time && payload.content.days) {
