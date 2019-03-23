@@ -182,6 +182,7 @@ Module.register("ABC-Controller", {
 						if (payload.content && payload.content.ogrenciNo) {
 							const ogrenciNo = parseInt(payload.content.ogrenciNo);
 							module.config.ogrenciNo = ogrenciNo;
+							module.getData();
 						}
 					}
 

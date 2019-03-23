@@ -53,7 +53,8 @@ Module.register("ABC-EtuExamTimeTable", {
                     // since my own api does not provide the courses
                     // taken by student, i use this urlApi as a gateway
 					const arr = JSON.parse(this.response);
-					console.log(arr);
+					console.log("Getting exam time table for student: ", self.config.ogrenciNo);
+					retry = false;
 					let courses = [];
 					arr.forEach(function(elem) {
 						if (!courses.includes(elem[0])) {
