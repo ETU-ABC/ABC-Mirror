@@ -235,20 +235,6 @@ module.exports = NodeHelper.create({
 			return true;
 		});
 
-		this.expressApp.post('/calendar', function(req,res){
-			// calendarID is in the JSON body of post request
-			var query = url.parse(req.url, true).query;
-			var url = query.url;
-			// Change config file...
-			// Restart the mirror...
-
-			if(res){
-				res.send({"status": "success"});
-			}
-
-			return true;
-		});
-
 		this.expressApp.get('/hide_all', function(req, res) {
 			self.sendSocketNotification("HIDE_ALL");
 
