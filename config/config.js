@@ -44,6 +44,19 @@ var config = {
 			position: "top_left"
 		},
 		{
+			module: "calendar",
+			position: "bottom_left",	// This can be any of the regions. Best results in left or right regions.
+			config: {
+					calendars: [
+						{
+							symbol: "calendar-check-o",
+							url: "https://calendar.google.com/calendar/ical/aalperenelbasan%40gmail.com/private-0c2094d5f955c491c2a0eacb933da98b/basic.ics",
+							maximumEntries: 3,
+						}
+					]
+			}
+		},
+		{
 			module: "compliments",
 			position: "lower_third",
 			config: {
@@ -69,6 +82,7 @@ var config = {
 				}
 			}
 		},
+		
 		//***{
 		//	module: "currentweather",
 		//	position: "top_right",
