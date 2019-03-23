@@ -264,6 +264,7 @@ Module.register("ABC-Controller", {
 							)
 							// since we know the current module is
 							// an object with alarmclock
+							module.start();
 							module.updateDom(2000);
 
 							console.log(module.config.accounts);
