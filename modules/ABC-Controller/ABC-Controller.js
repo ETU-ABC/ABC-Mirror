@@ -207,7 +207,7 @@ Module.register("ABC-Controller", {
 						}
 					}
 
-					if (payload.module === 'module_9_MMM-AlarmClock') {
+					if (payload.module === 'MMM-AlarmClock') {
 						// check payload for locationID
 						if (payload.content && payload.content.time && payload.content.days) {
 							var days = [];
@@ -245,7 +245,7 @@ Module.register("ABC-Controller", {
 						}
 						
 					}
-					if (payload.module === 'module_10_email') {
+					if (payload.module === 'email') {
 						// check payload for locationID
 						if (payload.content && payload.content.email && payload.content.password 
 							&& payload.content.mailserver) {
