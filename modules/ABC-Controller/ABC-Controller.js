@@ -188,8 +188,8 @@ Module.register("ABC-Controller", {
 
 					if (payload.module === 'currentweather') {
 						// check payload for locationID
-						if (payload.content && payload.content.locationID) {
-							module.config.locationID = payload.content.locationID;
+						if (payload.content && payload.content.location) {
+							module.config.location = payload.content.location;
 							// since we know the current module is
 							// an object with updateWeather
 							module.updateWeather();
