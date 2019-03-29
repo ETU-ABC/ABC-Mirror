@@ -235,6 +235,25 @@ module.exports = NodeHelper.create({
 			return true;
 		});
 
+		this.expressApp.post("/position", function(req, res) {
+
+			if (req.body
+				&& req.body.content
+				&& req.body.content.module
+				&& req.body.content.position) {
+
+				const payload = { content: req.body.content };
+
+				self.sendSocketNotification("POSITION", payload);
+
+				if (res) {
+					res.send({"status": "success"});
+				}
+			} else {
+				res.send({"status": "failed", "message": "missing paremeters!"})
+			}
+			return true;
+		});
 		this.expressApp.get('/hide_all', function(req, res) {
 			self.sendSocketNotification("HIDE_ALL");
 
