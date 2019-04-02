@@ -83,15 +83,15 @@ var config = {
 			}
 		},
 		
-		//***{
-		//	module: "currentweather",
-		//	position: "top_right",
-		//	config: {
-		//		location: "New York",
-		//		locationID: "",  //ID from http://bulk.openweathermap.org/sample/; unzip the gz file and find your city
-		//		appid: "YOUR_OPENWEATHER_API_KEY"
-		//	}
-		//},
+		{
+			module: "currentweather",
+			position: "top_right",
+			config: {
+				location: "Ankara",
+				locationID: "",  //ID from http://bulk.openweathermap.org/sample/; unzip the gz file and find your city
+				appid: "802ae46fc023bc8775cec2aa9ba06466"
+			}
+		},
 		//{
 		//	module: "weatherforecast",
 		//	position: "top_right",
