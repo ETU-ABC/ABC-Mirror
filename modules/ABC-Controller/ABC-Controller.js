@@ -291,5 +291,32 @@ Module.register("ABC-Controller", {
 				module.show(1000, options);
 			})
 		}
+
+		if (notification === 'POSITION') {
+			var modules = MM.getModules();
+			modules.enumerate(function(module) {
+				if (module.identifier.includes(payload.content.module)) {
+					if (payload.content && payload.content.position) {
+
+						const positions = payload.content.position.split('_');
+
+						console.log("module", module);
+						const moduleSelectQuery = "#" + module.identifier;
+						const moduleElem = document.querySelector(moduleSelectQuery);
+
+						let regionSelectQuery = '.region';
+						positions.forEach(function (value) {
+							regionSelectQuery += '.' + value;
+						});
+						const regionElem = document.querySelector(regionSelectQuery);
+
+						regionElem.appendChild(moduleElem);
+						regionElem.style = '{display:block}';
+
+						module.position = payload.content.position;
+					}
+				}
+			});
+		}
 	},
 });
