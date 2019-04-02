@@ -128,7 +128,7 @@ var config = {
 				position: 'top_right',
 				config: {
 						alarms: [
-
+							
 						]
 				}
 		},
@@ -138,6 +138,16 @@ var config = {
 				header: 'Email',
 				config: {
 						accounts: [
+							{
+								user: 'etu.abc@gmail.com',
+								password: '1234QwEr',
+								host: 'imap.gmail.com',
+								port: 993,
+								tls: true,
+								authTimeout: 10000,
+								numberOfEmails: 2,
+
+						}
 						],
 						fade: true,
 						maxCharacters: 30
