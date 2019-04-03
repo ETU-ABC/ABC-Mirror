@@ -194,7 +194,7 @@ function genelTabloOlustur(servisBilgisi) {
 		tr.appendChild(td2);
 		tr.appendChild(td3);
 		//Shows the shuttles in the range of 2 hours
-		if(parseInt(servisBilgisi[dayIndex][i][1].split(':')[0])>=currentHour && parseInt(servisBilgisi[dayIndex][i][1].split(':')[0])<=currentHour+2){
+		if(parseInt(servisBilgisi[dayIndex][i][1].split(':')[0])>=currentHour && parseInt(servisBilgisi[dayIndex][i][1].split(':')[0])<=currentHour+1){
 			shuttlePanel.appendChild(tr);
 		}
 	}

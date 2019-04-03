@@ -7,13 +7,13 @@ import pickle
 import time
 import cv2
 import requests
-
+import os
 #Initial variables
 oldtime = time.time()
 locked = False
 unlocked = True
 time.sleep(2)
-
+ctr_dataset = False
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
 print("[INFO] encode dosyasi + face detector okunuyor.")
@@ -22,7 +22,7 @@ detector = cv2.CascadeClassifier('modules/face_recognition/haarcascade_frontalfa
 
 # initialize the video stream and allow the camera sensor to warm up
 print("[INFO] starting video stream...")
-vs = VideoStream(src=0).start()
+vs = VideoStream(src=1).start()
 time.sleep(2.0)
 
 #hide modules
@@ -33,8 +33,12 @@ def unlock():
 def lock():
         requests.get("http://localhost:8080/hide_all")
         print("Kilitlendi")
+
+if os.path.exists('modules/face_recognition/dataset'):
+	ctr_dataset = True
 # start the FPS counter
 fps = FPS().start()
+
 
 # loop over frames from the video file stream
 while True:
@@ -61,7 +65,7 @@ while True:
         encodings = face_recognition.face_encodings(rgb, boxes)
         names = []
         #if there is no matched face for x second, then lock 
-        if (time.time() - oldtime >= 10) and (not locked):
+        if (time.time() - oldtime >= 10) and (not locked) and (ctr_dataset):
                 lock()
                 locked = True
                 unlocked = True

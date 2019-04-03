@@ -15,17 +15,17 @@ directory = args["name"]
 i = 0
 
 # Video stream
-vs = VideoStream(src=0).start()
+vs = VideoStream(src=1).start()
 fps = FPS().start()
 
 
 print("[INFO] Merhaba {}.Gulumse cekiyorum".format(directory))
 time.sleep(0.5)
 
-if not os.path.exists("modules/face_recognition/dataset/{}".format(directory)):
+if not os.path.exists("modules/face_recognition/dataset"):
     os.makedirs("modules/face_recognition/dataset/{}".format(directory))
 oldtime = time.time()
-while time.time()-oldtime < 6:
+while time.time()-oldtime < 3:
     image = vs.read()
     cv2.imwrite('modules/face_recognition/dataset/{}/opencv'.format(directory)+str(i)+'.png', image)
     time.sleep(0.1)

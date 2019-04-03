@@ -106,14 +106,14 @@ var config = {
 				module: 'ABC-EtuCourseTimetable',
 				position: "top_right",
 				config: {
-					ogrenciNo: 151201022
+					ogrenciNo: 161101003
 				}
 		},
     {
 				module: 'ABC-EtuExamTimeTable',
 				position: "top_center",
         config: {
-					ogrenciNo: 151201012
+					ogrenciNo: 161101003
 				}
     },
     {
@@ -128,7 +128,7 @@ var config = {
 				position: 'top_right',
 				config: {
 						alarms: [
-							
+							{time: "18:30", days: [1,2,3,4,5,6,7], title: "Alarm", message: "Alarm!"}
 						]
 				}
 		},

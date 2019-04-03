@@ -164,7 +164,7 @@ function tabloOlustur(ogrencino,grid) {
 	tr.className="title";
 
 	var th0 = document.createElement("th");
-	var day0 = document.createTextNode("151201022");
+	var day0 = document.createTextNode(ogrencino);
 	//day0.className="title";
 	th0.appendChild(day0);
 	tr.appendChild(th0);
@@ -308,7 +308,7 @@ function gunlukTabloOlustur(ogrencino,grid) {
 	tr.className="title";
 
 	var th0 = document.createElement("th");
-	var day0 = document.createTextNode("151201022");
+	var day0 = document.createTextNode(ogrencino);
 	//day0.className="title";
 	th0.appendChild(day0);
 	tr.appendChild(th0);

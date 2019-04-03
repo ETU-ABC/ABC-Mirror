@@ -210,15 +210,17 @@ module.exports = NodeHelper.create({
 			return true;
 		});
 		this.expressApp.post("/take_photo", function(req,res) {
-	
+			console.log("1");
 			var name = req.body.name;
 			const spawn = require("child_process").exec;
 			const pythonProcess = spawn('python3 ./modules/face_recognition/add_new_user.py --name '+ name + '&& python3 ./modules/face_recognition/encode_faces.py && python3 ./modules/face_recognition/face_encoding.py');
+			pythonProcess.stdin.end();
+			console.log("2");	
 			pythonProcess.stdout.on('data', function(data) {
 
         			console.log(data.toString());
         			res.write(data);
-        			res.end('end');
+        			
     			});
 		});
 		this.expressApp.post("/edit", function(req, res) {

@@ -5,12 +5,13 @@ import pickle
 import cv2
 import os
 
+
 print("[INFO] Encode islemi basliyor. Bu islem birkac saniye surecek")
 # grab the paths to the input images in our dataset
 
 imagePaths = list(paths.list_images("modules/face_recognition/dataset"))
 
-# initialize the list of known encodings and known names
+# initiaize the list of known encodings and known names
 knownEncodings = []
 knownNames = []
 
